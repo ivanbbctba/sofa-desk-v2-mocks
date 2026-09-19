@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Onda A — HUD denso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="run-shared.css" />
+</head>
+<body>
+  <div class="run-app">
+    <div class="run-map-wrap" aria-hidden="false">
+      <svg viewBox="0 0 360 520" preserveAspectRatio="xMidYMid slice">
+        <rect width="360" height="520" fill="#e8e6df" />
+        <path class="route-done" d="M 60 420 L 60 320 L 140 280 L 140 180 L 220 140" />
+        <path class="route-active" d="M 220 140 L 260 120 L 300 100" />
+        <path class="route-upcoming" d="M 300 100 L 320 80 L 300 40 L 240 30" />
+        <circle class="map-pin done" cx="60" cy="420" r="8" />
+        <circle class="map-pin done" cx="140" cy="180" r="8" />
+        <circle class="map-pin current" cx="260" cy="120" r="11" />
+        <circle class="map-pin" cx="300" cy="40" r="7" />
+        <text x="268" y="108" font-size="11" fill="#4f48d4" font-family="Inter,sans-serif" font-weight="600">C-07</text>
+      </svg>
+    </div>
+
+    <div class="run-hud">
+      <p class="hud-step num">Onda #1042 · 8 de 17 · gerada no setup</p>
+      <p class="hud-qty num">2 un.</p>
+      <p class="hud-next">Depois: <strong>D-02 · Meia kit 3 pares</strong></p>
+
+      <div class="speak-card">
+        <p class="speak-label">Falar</p>
+        <p>Dois moletom cinza M no C-07.</p>
+      </div>
+
+      <button type="button" class="peek-disclosure" id="peek-a" aria-expanded="false">
+        Parada anterior
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div class="peek-disclosure-body" id="peek-a-body">
+        <strong>B-04</strong> · Calça jeans 42 — <span class="num">1 un.</span> ok
+      </div>
+
+      <div class="hud-actions stack-secondary">
+        <button type="button" class="btn btn-primary">Separar</button>
+        <button type="button" class="btn btn-ghost">Compartilhar</button>
+      </div>
+    </div>
+    <p class="run-contrast">Colaborador em /r: só avança, sem mapa nem voltar.</p>
+    <footer class="run-footer">MOCK — Critiquito / sofa Desk options · <a href="desk-a.html" style="color:var(--mute)">Mesa A</a></footer>
+  </div>
+  <script>
+    document.getElementById("peek-a").addEventListener("click", function () {
+      var b = document.getElementById("peek-a-body");
+      var open = b.classList.toggle("is-open");
+      this.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  </script>
+</body>
+</html>

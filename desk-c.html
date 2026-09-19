@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Mesa C — Olhar dividido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .variant-tag { font-size: 11px; color: var(--mute); margin: 0 0 6px; }
+    h1 { margin: 0 0 14px; font-size: 24px; font-weight: 600; }
+    .factory-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .factory-strip strong { font-weight: 500; }
+    .factory-strip .num { color: var(--ink-2); }
+    .agora-line {
+      display: block;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .agora-line span { color: var(--mute); }
+    .wave-list { list-style: none; margin: 0; padding: 0; }
+    .wave-link {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 2px;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      font-size: 16px;
+    }
+    .wave-link .meta { font-size: 14px; color: var(--mute); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <p class="variant-tag">Desk C</p>
+    <h1>Mesa</h1>
+
+    <div class="factory-strip">
+      <strong>Próxima auto</strong>
+      <span class="num">8 ped. · ~18 min</span>
+    </div>
+
+    <a class="agora-line" href="onda-c.html">
+      <span>Agora ·</span> Onda #1042 · parada <span class="num">8/17</span> <span>(gerada no setup)</span>
+    </a>
+
+    <ul class="wave-list">
+      <li>
+        <a class="wave-link" href="onda-c.html">
+          <span>Onda #1042</span>
+          <span class="meta num">em andamento</span>
+        </a>
+      </li>
+      <li>
+        <a class="wave-link" href="onda-c.html">
+          <span>Onda #1043</span>
+          <span class="meta num">14 ped.</span>
+        </a>
+      </li>
+      <li>
+        <a class="wave-link" href="onda-c.html">
+          <span>Onda #1044</span>
+          <span class="meta num">9 ped.</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer class="mock-footer">MOCK — Critiquito / sofa Desk options · <a href="index.html" style="color:var(--mute)">Hub</a></footer>
+  </div>
+</body>
+</html>

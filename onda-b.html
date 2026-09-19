@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Onda B — HUD arejado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="run-shared.css" />
+</head>
+<body>
+  <div class="run-app">
+    <div class="run-map-wrap">
+      <svg viewBox="0 0 360 520" preserveAspectRatio="xMidYMid slice">
+        <rect width="360" height="520" fill="#e8e6df" />
+        <path class="route-done" d="M 60 420 L 60 320 L 140 280 L 140 180 L 220 140" />
+        <path class="route-active" d="M 220 140 L 260 120 L 300 100" />
+        <path class="route-upcoming" d="M 300 100 L 320 80 L 300 40 L 240 30" />
+        <circle class="map-pin done" cx="60" cy="420" r="8" />
+        <circle class="map-pin done" cx="140" cy="180" r="8" />
+        <circle class="map-pin current" cx="260" cy="120" r="11" />
+        <circle class="map-pin" cx="300" cy="40" r="7" />
+      </svg>
+      <button type="button" class="peek-edge" id="peek-b" aria-label="Ver parada anterior">‹ anterior</button>
+      <div class="peek-panel" id="peek-b-panel">
+        <strong>B-04</strong> · Calça jeans 42 — <span class="num">1 un.</span>
+      </div>
+    </div>
+
+    <div class="run-hud airy">
+      <p class="hud-step num">8 / 17</p>
+      <p class="hud-qty airy-size num">2</p>
+      <p class="hud-next" style="margin-bottom: 18px">Moletom cinza M · <strong>C-07</strong></p>
+
+      <div class="speak-card" style="margin-bottom: 20px">
+        <p class="speak-label">Falar</p>
+        <p>Dois moletom cinza M no C-07.</p>
+      </div>
+
+      <p class="hud-next" style="font-size: 13px; margin-bottom: 16px">Próximo: D-02 · Meia kit</p>
+
+      <div class="hud-actions">
+        <button type="button" class="btn btn-primary">Separar</button>
+        <button type="button" class="btn btn-ghost btn-icon" aria-label="Compartilhar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" y1="2" x2="12" y2="15" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <p class="run-contrast">Colaborador em /r: só avança, sem mapa nem voltar.</p>
+    <footer class="run-footer">MOCK — Critiquito / sofa Desk options · <a href="desk-b.html" style="color:var(--mute)">Mesa B</a></footer>
+  </div>
+  <script>
+    document.getElementById("peek-b").addEventListener("click", function () {
+      document.getElementById("peek-b-panel").classList.toggle("is-open");
+    });
+  </script>
+</body>
+</html>

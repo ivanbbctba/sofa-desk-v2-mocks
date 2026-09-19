@@ -1,0 +1,138 @@
+:root {
+  --ink: #1a1b1a;
+  --ink-2: #3c3e3c;
+  --mute: #6d706c;
+  --line: #e3e1da;
+  --paper: #f7f6f2;
+  --paper-2: #efeee8;
+  --white: #fffcf8;
+  --accent: #635bff;
+  --accent-deep: #4f48d4;
+  --accent-soft: #eeedff;
+  --ok: #3d6f60;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  min-height: 100dvh;
+}
+
+.shell {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 16px 16px calc(24px + var(--safe-bottom));
+}
+
+@media (min-width: 720px) {
+  .shell {
+    max-width: 440px;
+    padding-top: 28px;
+  }
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 16px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-deep);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+}
+
+.btn-ghost:hover {
+  background: var(--paper);
+}
+
+.mock-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--mute);
+  line-height: 1.4;
+}
+
+.state-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 4px;
+  background: var(--paper-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+
+.state-tabs button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--mute);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 9px 6px;
+  border-radius: calc(var(--radius-md) - 4px);
+  cursor: pointer;
+}
+
+.state-tabs button[aria-selected="true"] {
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(26, 27, 26, 0.06);
+}
+
+.state-panel {
+  display: none;
+}
+
+.state-panel.is-active {
+  display: block;
+}

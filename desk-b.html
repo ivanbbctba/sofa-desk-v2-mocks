@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Mesa B — Fábrica em destaque</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .variant-tag { font-size: 11px; color: var(--mute); margin: 0 0 6px; }
+    h1 { margin: 0 0 16px; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+    .factory-hero {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .factory-hero .countdown {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      margin: 0 0 4px;
+      color: var(--ink);
+    }
+    .factory-hero .countdown span {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--mute);
+    }
+    .factory-hero .missing {
+      margin: 0 0 18px;
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.45;
+    }
+    .factory-hero .btn { width: 100%; max-width: 280px; }
+    .factory-hero .pause {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--mute);
+      background: none;
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .list-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--mute);
+      margin: 0 0 8px;
+    }
+    .wave-list { list-style: none; margin: 0; padding: 0; }
+    .wave-link {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      font-size: 15px;
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px solid var(--line);
+    }
+    .wave-link .meta { color: var(--mute); font-size: 14px; }
+    .setup-pill {
+      font-size: 11px;
+      color: var(--accent-deep);
+      background: var(--accent-soft);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <p class="variant-tag">Desk B</p>
+    <h1>Mesa</h1>
+
+    <section class="factory-hero" aria-label="Fábrica">
+      <p class="countdown num">~18 <span>min</span></p>
+      <p class="missing">Para a próxima onda automática faltam <strong class="num">8 pedidos</strong> ou você pode antecipar agora.</p>
+      <button type="button" class="btn btn-primary">Antecipar Pedidos do dia</button>
+      <button type="button" class="pause">Pausar automático</button>
+    </section>
+
+    <p class="list-label">Ondas</p>
+    <ul class="wave-list">
+      <li>
+        <a class="wave-link" href="onda-b.html">
+          <span>Onda #1042<span class="setup-pill">setup</span></span>
+          <span class="meta num">8/17</span>
+        </a>
+      </li>
+      <li>
+        <a class="wave-link" href="onda-b.html">
+          <span>Onda #1043</span>
+          <span class="meta num">14 ped.</span>
+        </a>
+      </li>
+      <li>
+        <a class="wave-link" href="onda-b.html">
+          <span>Onda #1044</span>
+          <span class="meta num">9 ped.</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer class="mock-footer">MOCK — Critiquito / sofa Desk options · <a href="index.html" style="color:var(--mute)">Hub</a></footer>
+  </div>
+</body>
+</html>

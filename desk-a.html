@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Mesa A — Ultra-mínima</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .variant-tag {
+      font-size: 11px;
+      color: var(--mute);
+      margin: 0 0 6px;
+    }
+    h1 {
+      margin: 0 0 20px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+    .factory-meter {
+      margin-bottom: 24px;
+    }
+    .meter-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--mute);
+      margin-bottom: 6px;
+    }
+    .meter-bar {
+      height: 4px;
+      background: var(--paper-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .meter-fill {
+      height: 100%;
+      width: 62%;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+    .wave-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .wave-link {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+    }
+    .wave-link .title {
+      font-size: 17px;
+      font-weight: 500;
+    }
+    .wave-link .sub {
+      font-size: 13px;
+      color: var(--mute);
+    }
+    .setup-note {
+      display: block;
+      font-size: 12px;
+      color: var(--accent-deep);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <p class="variant-tag">Desk A</p>
+    <h1>Mesa</h1>
+
+    <div class="factory-meter" aria-label="Próxima onda automática">
+      <div class="meter-line">
+        <span>Auto · Pedidos do dia</span>
+        <span class="num">faltam 8 ped.</span>
+      </div>
+      <div class="meter-bar"><div class="meter-fill"></div></div>
+    </div>
+
+    <ul class="wave-list">
+      <li>
+        <a class="wave-link" href="onda-a.html">
+          <span>
+            <span class="title">Onda #1042</span>
+            <span class="setup-note">Gerada no setup</span>
+          </span>
+          <span class="sub num">8/17</span>
+        </a>
+      </li>
+      <li>
+        <a class="wave-link" href="onda-a.html">
+          <span class="title">Onda #1043</span>
+          <span class="sub num">14 ped.</span>
+        </a>
+      </li>
+      <li>
+        <a class="wave-link" href="onda-a.html">
+          <span class="title">Onda #1044</span>
+          <span class="sub num">9 ped.</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer class="mock-footer">MOCK — Critiquito / sofa Desk options · <a href="index.html" style="color:var(--mute)">Hub</a></footer>
+  </div>
+</body>
+</html>
