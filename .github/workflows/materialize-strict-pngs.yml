@@ -1,0 +1,58 @@
+name: materialize-strict-pngs
+on:
+  push:
+    paths:
+      - "strict/_hex/**"
+      - ".github/workflows/materialize-strict-pngs.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode hex, verify, commit PNGs
+        env:
+          EXPECT_STOP1_SHA256: 7ddc63e833ddffc290d98d4f5829115808ec6e2950c88570f11845d0012d5b50
+          EXPECT_STOP2_SHA256: 49b5a7e4876bd71a9bd9e70c9211c0e1b207700d215e34314458dad988abeb19
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          import hashlib, os, struct, sys
+          hexdir = Path('strict/_hex')
+          if not hexdir.exists():
+              print('no hex dir yet')
+              sys.exit(0)
+          def assemble(prefix, expect_len, expect_sha):
+              parts = sorted(hexdir.glob(f'{prefix}.*.hex'))
+              if not parts:
+                  raise SystemExit(f'missing {prefix} parts')
+              hx = ''.join(p.read_text().strip() for p in parts)
+              data = bytes.fromhex(hx)
+              sha = hashlib.sha256(data).hexdigest()
+              print(prefix, 'parts', len(parts), 'bytes', len(data), sha)
+              if len(data) != expect_len or sha != expect_sha:
+                  raise SystemExit(f'{prefix} mismatch size/sha')
+              if data[:8] != b'\x89PNG\r\n\x1a\n':
+                  raise SystemExit(f'{prefix} not a PNG')
+              w, h = struct.unpack('>II', data[16:24])
+              if (w, h) != (390, 844):
+                  raise SystemExit(f'{prefix} dims {w}x{h}')
+              out = Path(f'strict/strict-speak-{prefix}.png')
+              out.parent.mkdir(exist_ok=True)
+              out.write_bytes(data)
+          assemble('stop1', 15628, os.environ['EXPECT_STOP1_SHA256'])
+          assemble('stop2', 16775, os.environ['EXPECT_STOP2_SHA256'])
+          print('ok')
+          PY
+          git config user.name "Ivan Beira"
+          git config user.email "61988079+ivanbbctba@users.noreply.github.com"
+          rm -rf strict/_hex
+          rm -f strict/*.b64 strict/*.b64.p* || true
+          rm -f .github/workflows/materialize-strict-pngs.yml
+          git add -A
+          git status
+          git commit -m "Add Strict Speak+Feito phone shots (390x844)"
+          git push
