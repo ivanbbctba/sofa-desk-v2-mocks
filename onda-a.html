@@ -6,58 +6,55 @@
   <title>Onda A — HUD denso</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
   <link rel="stylesheet" href="run-shared.css" />
 </head>
-<body>
-  <div class="run-app">
-    <div class="run-map-wrap" aria-hidden="false">
-      <svg viewBox="0 0 360 520" preserveAspectRatio="xMidYMid slice">
-        <rect width="360" height="520" fill="#e8e6df" />
-        <path class="route-done" d="M 60 420 L 60 320 L 140 280 L 140 180 L 220 140" />
-        <path class="route-active" d="M 220 140 L 260 120 L 300 100" />
-        <path class="route-upcoming" d="M 300 100 L 320 80 L 300 40 L 240 30" />
-        <circle class="map-pin done" cx="60" cy="420" r="8" />
-        <circle class="map-pin done" cx="140" cy="180" r="8" />
-        <circle class="map-pin current" cx="260" cy="120" r="11" />
-        <circle class="map-pin" cx="300" cy="40" r="7" />
-        <text x="268" y="108" font-size="11" fill="#4f48d4" font-family="Inter,sans-serif" font-weight="600">C-07</text>
+<body class="run-body">
+  <div class="run-app variant-a" data-variant="a" data-desk="desk-a.html">
+    <div class="run-map" aria-hidden="true">
+      <div class="aisles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <svg id="route-svg" class="route-svg" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="nodeGreen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6ad88a" />
+            <stop offset="100%" stop-color="#2f9a55" />
+          </linearGradient>
+          <clipPath id="hudClip">
+            <rect x="-50" y="-40" width="490" height="620" />
+          </clipPath>
+        </defs>
+        <g clip-path="url(#hudClip)">
+          <path id="route-dash" class="route-dash" d="" />
+          <path id="route-solid" class="route-solid" d="" />
+          <g id="route-nodes"></g>
+        </g>
       </svg>
+      <div class="map-fade"></div>
     </div>
+
+    <button type="button" class="btn-back" id="btn-back" aria-label="Parada anterior">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 5 L8 12 L15 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <p class="run-progress num" id="run-progress">6 de 18</p>
+
+    <button type="button" class="peek-disclosure" id="peek-toggle" aria-expanded="false">
+      Parada anterior
+      <span aria-hidden="true">▾</span>
+    </button>
+    <div class="peek-disclosure-body" id="peek-body"></div>
 
     <div class="run-hud">
-      <p class="hud-step num">Onda #1042 · 8 de 17 · gerada no setup</p>
-      <p class="hud-qty num">2 un.</p>
-      <p class="hud-next">Depois: <strong>D-02 · Meia kit 3 pares</strong></p>
-
-      <div class="speak-card">
-        <p class="speak-label">Falar</p>
-        <p>Dois moletom cinza M no C-07.</p>
-      </div>
-
-      <button type="button" class="peek-disclosure" id="peek-a" aria-expanded="false">
-        Parada anterior
-        <span aria-hidden="true">▾</span>
-      </button>
-      <div class="peek-disclosure-body" id="peek-a-body">
-        <strong>B-04</strong> · Calça jeans 42 — <span class="num">1 un.</span> ok
-      </div>
-
-      <div class="hud-actions stack-secondary">
-        <button type="button" class="btn btn-primary">Separar</button>
-        <button type="button" class="btn btn-ghost">Compartilhar</button>
-      </div>
+      <p class="hud-qty num" id="hud-qty">7</p>
+      <p class="hud-loc" id="hud-loc">B-03</p>
+      <p class="hud-depois" id="hud-depois">depois B-09</p>
     </div>
-    <p class="run-contrast">Colaborador em /r: só avança, sem mapa nem voltar.</p>
-    <footer class="run-footer">MOCK — Critiquito / sofa Desk options · <a href="desk-a.html" style="color:var(--mute)">Mesa A</a></footer>
+
+    <button type="button" class="btn-feito" id="btn-feito">Feito</button>
+    <div class="toast" id="run-toast" role="status"></div>
   </div>
-  <script>
-    document.getElementById("peek-a").addEventListener("click", function () {
-      var b = document.getElementById("peek-a-body");
-      var open = b.classList.toggle("is-open");
-      this.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-  </script>
+  <script src="run.js"></script>
 </body>
 </html>

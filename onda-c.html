@@ -3,75 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Onda C — Mapa em frente</title>
+  <title>Onda C — mapa em frente</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
   <link rel="stylesheet" href="run-shared.css" />
 </head>
-<body>
-  <div class="run-app map-forward">
-    <div class="run-map-wrap">
-      <div class="run-top">
-        <a href="desk-c.html">← Mesa</a>
-        <span class="wave-id num">#1042</span>
-      </div>
-      <svg viewBox="0 0 360 560" preserveAspectRatio="xMidYMid slice">
-        <rect width="360" height="560" fill="#e8e6df" />
-        <path class="route-done" d="M 50 480 L 50 360 L 130 310 L 130 200 L 210 150" />
-        <path class="route-active" d="M 210 150 L 255 125 L 295 95" />
-        <path class="route-upcoming" d="M 295 95 L 315 70 L 290 35 L 220 25" />
-        <circle class="map-pin done" cx="50" cy="480" r="9" />
-        <circle class="map-pin done" cx="130" cy="200" r="9" />
-        <circle class="map-pin current" cx="255" cy="125" r="13" />
-        <circle class="map-pin" cx="290" cy="35" r="8" />
-        <circle class="map-pin" cx="220" cy="25" r="6" />
+<body class="run-body">
+  <div class="run-app variant-c" data-variant="c" data-desk="desk-c.html">
+    <div class="run-map" aria-hidden="true">
+      <div class="aisles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <svg id="route-svg" class="route-svg" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="nodeGreen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6ad88a" />
+            <stop offset="100%" stop-color="#2f9a55" />
+          </linearGradient>
+          <clipPath id="hudClip">
+            <rect x="-50" y="-40" width="490" height="640" />
+          </clipPath>
+        </defs>
+        <g clip-path="url(#hudClip)">
+          <path id="route-dash" class="route-dash" d="" />
+          <path id="route-solid" class="route-solid" d="" />
+          <g id="route-nodes"></g>
+        </g>
       </svg>
-      <button type="button" class="peek-edge" id="peek-c" style="top: 58%" aria-label="Parada anterior">‹</button>
-      <div class="peek-panel" id="peek-c-panel" style="bottom: 120px">
-        B-04 · Calça jeans 42 — <span class="num">1 un.</span>
+      <div class="map-fade"></div>
+    </div>
+
+    <div class="run-top">
+      <button type="button" class="btn-back" id="btn-back" aria-label="Parada anterior">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 5 L8 12 L15 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <p class="run-progress num" id="run-progress">6 de 18</p>
+      <div class="overflow-menu">
+        <button type="button" class="menu-trigger" id="menu-c" aria-label="Mais">⋯</button>
+        <div class="overflow-pop" id="menu-c-pop">
+          <button type="button" data-act="share">Compartilhar</button>
+          <button type="button" data-act="separar">Separar</button>
+          <button type="button" data-act="peek">Parada anterior</button>
+        </div>
       </div>
     </div>
 
-    <div class="run-hud thin">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px">
-        <div>
-          <p class="hud-qty thin-size num" style="margin:0">2 un. · C-07</p>
-          <p class="hud-next" style="margin:8px 0 0;font-size:13px">Moletom cinza M</p>
-        </div>
-        <div class="overflow-menu">
-          <button type="button" class="menu-trigger" id="menu-c" aria-label="Mais">⋯</button>
-          <div class="overflow-pop" id="menu-c-pop">
-            <button type="button">Compartilhar</button>
-            <button type="button" id="peek-c-menu">Parada anterior</button>
-          </div>
-        </div>
-      </div>
-      <div class="speak-card compact">
-        <p style="margin:0;font-size:14px;font-weight:500">Falar: dois moletom cinza M no C-07.</p>
-      </div>
-      <div class="hud-actions">
-        <button type="button" class="btn btn-primary">Separar</button>
-        <button type="button" class="btn btn-ghost" style="flex:0.6;font-size:13px">Próx: D-02</button>
-      </div>
+    <div class="run-hud">
+      <p class="hud-qty num" id="hud-qty">7</p>
+      <p class="hud-loc" id="hud-loc">B-03</p>
+      <p class="hud-depois" id="hud-depois">depois B-09</p>
     </div>
-    <p class="run-contrast">Colaborador em /r: só avança, sem mapa nem voltar.</p>
-    <footer class="run-footer">MOCK — Critiquito / sofa Desk options</footer>
+
+    <button type="button" class="btn-feito" id="btn-feito">Feito</button>
+    <div class="toast" id="run-toast" role="status"></div>
   </div>
-  <script>
-    var menu = document.getElementById("menu-c");
-    var pop = document.getElementById("menu-c-pop");
-    menu.addEventListener("click", function () {
-      pop.classList.toggle("is-open");
-    });
-    document.getElementById("peek-c").addEventListener("click", function () {
-      document.getElementById("peek-c-panel").classList.toggle("is-open");
-    });
-    document.getElementById("peek-c-menu").addEventListener("click", function () {
-      document.getElementById("peek-c-panel").classList.toggle("is-open");
-      pop.classList.remove("is-open");
-    });
-  </script>
+  <script src="run.js"></script>
 </body>
 </html>
