@@ -46,16 +46,16 @@ body.run-body {
 
 .aisles i {
   display: block;
-  width: 22px;
-  height: 100%;
+  width: 28px;
+  height: 78%;
+  margin-top: 7%;
   border-radius: 999px;
   background: linear-gradient(
     180deg,
-    transparent 0%,
-    var(--aisle) 10%,
-    rgba(176, 184, 200, 0.5) 46%,
-    var(--aisle) 82%,
-    transparent 100%
+    rgba(176, 184, 200, 0.12) 0%,
+    rgba(176, 184, 200, 0.48) 16%,
+    rgba(176, 184, 200, 0.4) 72%,
+    rgba(176, 184, 200, 0.08) 100%
   );
 }
 
@@ -74,7 +74,7 @@ body.run-body {
 .route-solid {
   fill: none;
   stroke: #635bff;
-  stroke-width: 9;
+  stroke-width: 12;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -82,11 +82,11 @@ body.run-body {
 .route-dash {
   fill: none;
   stroke: #635bff;
-  stroke-width: 8;
+  stroke-width: 11;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 7 11;
-  opacity: 0.38;
+  stroke-dasharray: 8 12;
+  opacity: 0.42;
 }
 
 .node {
@@ -105,13 +105,8 @@ body.run-body {
 
 .node.current {
   fill: url(#nodeGreen);
-  stroke: none;
-}
-
-.node-ring {
-  fill: none;
-  stroke: var(--ok);
-  stroke-width: 3.5;
+  stroke: #e8edf5;
+  stroke-width: 3;
 }
 
 .map-fade {
@@ -225,12 +220,16 @@ body.run-body {
 }
 
 .peek-disclosure {
+  position: absolute;
+  left: 20px;
+  bottom: calc(198px + var(--safe-bottom));
+  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  width: min(210px, 100%);
-  margin: 0 0 10px;
+  width: auto;
+  margin: 0;
   padding: 0;
   border: none;
   background: none;
@@ -243,10 +242,15 @@ body.run-body {
 
 .peek-disclosure-body {
   display: none;
-  margin: -4px 0 12px;
+  position: absolute;
+  left: 20px;
+  bottom: calc(168px + var(--safe-bottom));
+  z-index: 4;
+  margin: 0;
   font-size: 13px;
   color: var(--ink-2);
   line-height: 1.4;
+  max-width: 200px;
 }
 
 .peek-disclosure-body.is-open {

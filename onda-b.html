@@ -20,10 +20,15 @@
             <stop offset="0%" stop-color="#6ad88a" />
             <stop offset="100%" stop-color="#2f9a55" />
           </linearGradient>
+          <clipPath id="hudClip">
+            <rect x="-50" y="-40" width="490" height="620" />
+          </clipPath>
         </defs>
-        <path id="route-dash" class="route-dash" d="" />
-        <path id="route-solid" class="route-solid" d="" />
-        <g id="route-nodes"></g>
+        <g clip-path="url(#hudClip)">
+          <path id="route-dash" class="route-dash" d="" />
+          <path id="route-solid" class="route-solid" d="" />
+          <g id="route-nodes"></g>
+        </g>
       </svg>
       <div class="map-fade"></div>
     </div>

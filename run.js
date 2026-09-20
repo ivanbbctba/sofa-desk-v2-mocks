@@ -100,37 +100,35 @@
 
   function toPath(points) {
     if (!points.length) return "";
+    if (points.length === 1) {
+      return "M " + points[0][0].toFixed(1) + " " + points[0][1].toFixed(1);
+    }
+    var radius = 28;
     var d = "M " + points[0][0].toFixed(1) + " " + points[0][1].toFixed(1);
     var i;
     for (i = 1; i < points.length; i += 1) {
-      d += " L " + points[i][0].toFixed(1) + " " + points[i][1].toFixed(1);
+      var curr = points[i];
+      var prev = points[i - 1];
+      var next = points[i + 1];
+      if (!next) {
+        d += " L " + curr[0].toFixed(1) + " " + curr[1].toFixed(1);
+        break;
+      }
+      var v1x = prev[0] - curr[0];
+      var v1y = prev[1] - curr[1];
+      var v2x = next[0] - curr[0];
+      var v2y = next[1] - curr[1];
+      var l1 = Math.hypot(v1x, v1y) || 1;
+      var l2 = Math.hypot(v2x, v2y) || 1;
+      var rr = Math.min(radius, l1 / 2.2, l2 / 2.2);
+      var ax = curr[0] + (v1x / l1) * rr;
+      var ay = curr[1] + (v1y / l1) * rr;
+      var bx = curr[0] + (v2x / l2) * rr;
+      var by = curr[1] + (v2y / l2) * rr;
+      d += " L " + ax.toFixed(1) + " " + ay.toFixed(1);
+      d += " Q " + curr[0].toFixed(1) + " " + curr[1].toFixed(1) + " " + bx.toFixed(1) + " " + by.toFixed(1);
     }
     return d;
-  }
-
-  function frameBox(points, extra, variant) {
-    var pad = extra;
-    var xs = points.map(function (p) { return p[0]; });
-    var ys = points.map(function (p) { return p[1]; });
-    var minX = Math.min.apply(null, xs) - pad;
-    var maxX = Math.max.apply(null, xs) + pad;
-    var minY = Math.min.apply(null, ys) - pad;
-    var maxY = Math.max.apply(null, ys) + pad;
-    var aspect = 390 / 844;
-    var w = Math.max(160, maxX - minX);
-    var h = Math.max(280, maxY - minY);
-    if (variant === "c") {
-      w *= 1.12;
-      h *= 1.08;
-    }
-    if (w / h > aspect) {
-      h = w / aspect;
-    } else {
-      w = h * aspect;
-    }
-    var cx = (minX + maxX) / 2;
-    var cy = (minY + maxY) / 2 - 20;
-    return [cx - w / 2, cy - h / 2, w, h].map(function (n) { return n.toFixed(1); }).join(" ");
   }
 
   var app = document.querySelector(".run-app");
@@ -194,29 +192,29 @@
     var nextCode = stop.next === "Fim" ? stop.loc : stop.next;
     var nextPt = indexOnRoute(route, nextCode);
     var solidEnd = Math.max(here, nextPt);
-    var solidPts = route.slice(0, solidEnd + 1);
-    var dashPts = route.slice(solidEnd);
-    if (solidPts.length === 1) solidPts = [solidPts[0], solidPts[0]];
+    var solidStart = variant === "c"
+      ? 0
+      : indexOnRoute(route, STOPS[Math.max(0, index - (index < 3 ? 0 : 2))].loc);
+    var dashEnd = Math.min(route.length, nextPt + (variant === "c" ? 18 : 10));
+    var solidPts = route.slice(solidStart, solidEnd + 1);
+    var dashPts = route.slice(solidEnd, dashEnd);
+    if (solidPts.length === 1) solidPts = [solidPts[0], [solidPts[0][0], solidPts[0][1] + 1]];
     solid.setAttribute("d", toPath(solidPts));
-    dash.setAttribute("d", toPath(dashPts.length ? dashPts : solidPts));
-
-    var focusStart = Math.max(0, here - (variant === "c" ? 14 : 3));
-    var focusEnd = Math.min(route.length, nextPt + (variant === "c" ? 10 : 4));
-    var framePts = route.slice(focusStart, focusEnd);
-    if (!framePts.length) framePts = [xy(stop.loc)];
-    svg.setAttribute("viewBox", frameBox(framePts, variant === "c" ? 78 : 56, variant));
+    dash.setAttribute("d", dashPts.length > 1 ? toPath(dashPts) : "");
+    svg.setAttribute("viewBox", "0 0 390 844");
 
     var current = xy(stop.loc);
     var html = "";
     var i;
     for (i = 0; i < STOPS.length; i += 1) {
-      var p = xy(STOPS[i].loc);
       if (i === index) continue;
+      if (variant !== "c" && (i < index - 2 || i > index + 2)) continue;
+      var p = xy(STOPS[i].loc);
+      if (p[1] > 560) continue;
       var cls = i < index ? "node on-path" : "node upcoming";
-      html += '<circle class="' + cls + '" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (i < index ? 4.5 : 5) + '" />';
+      html += '<circle class="' + cls + '" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (i < index ? 5 : 6) + '" />';
     }
-    html += '<circle class="node-ring" cx="' + current[0] + '" cy="' + current[1] + '" r="13" />';
-    html += '<circle class="node current" cx="' + current[0] + '" cy="' + current[1] + '" r="8.5" />';
+    html += '<circle class="node current" cx="' + current[0] + '" cy="' + current[1] + '" r="11" />';
     nodes.innerHTML = html;
 
     qtyEl.textContent = String(stop.qty);
